@@ -10,7 +10,7 @@ USER sdk
 RUN build unmaintained x11vnc
 
 
-FROM alpine:3.7
+FROM azul/zulu-openjdk-alpine
 MAINTAINER Daniel Guerra
 COPY --from=builder /home/sdk/.abuild /tmp/.abuild
 RUN find /tmp/.abuild -name "*.pub" -exec cp {} /etc/apk/keys \;
