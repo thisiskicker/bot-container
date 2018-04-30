@@ -23,7 +23,8 @@ RUN apk --no-cache add xvfb openbox xfce4-terminal supervisor sudo ttf-dejavu \
 && echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers \
 && rm -rf /tmp/* /var/cache/apk/*
 ADD etc /etc
+ADD alpine /home/alpine
 WORKDIR /home/alpine
 EXPOSE 5900
 USER alpine
-CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
+CMD ["/bin/sh","/home/alpine/start.sh"]
