@@ -16,14 +16,15 @@ COPY --from=builder /home/sdk/.abuild /tmp/.abuild
 RUN find /tmp/.abuild -name "*.pub" -exec cp {} /etc/apk/keys \;
 COPY --from=builder /home/sdk/packages/unmaintained/x86_64/x11vnc-0.9.13-r0.apk /tmp/x11vnc-0.9.13-r0.apk
 RUN apk --no-cache --update add /tmp/x11vnc-0.9.13-r0.apk
+ADD etc /etc
+ADD alpine /home/alpine
 RUN apk --no-cache add xvfb openbox xfce4-terminal supervisor sudo ttf-dejavu \
 && addgroup alpine \
 && adduser  -G alpine -s /bin/sh -D alpine \
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
 && echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers \
-&& rm -rf /tmp/* /var/cache/apk/*
-ADD etc /etc
-ADD alpine /home/alpine
+&& rm -rf /tmp/* /var/cache/apk/* \
+&& chown -R -aG alpine:alpine /home/alpine/OSBot osbot.jar
 WORKDIR /home/alpine
 EXPOSE 5900
 USER alpine
