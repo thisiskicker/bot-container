@@ -24,7 +24,7 @@ RUN apk --no-cache add xvfb openbox xfce4-terminal supervisor sudo ttf-dejavu \
 && echo "alpine:alpine" | /usr/sbin/chpasswd \
 && echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers \
 && rm -rf /tmp/* /var/cache/apk/* \
-&& chown -R -aG alpine:alpine /home/alpine/OSBot osbot.jar
+&& chown -R alpine:alpine /home/alpine/OSBot osbot.jar
 WORKDIR /home/alpine
 EXPOSE 5900
 USER alpine
